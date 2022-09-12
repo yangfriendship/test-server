@@ -13,6 +13,12 @@ import java.util.Map;
 @Slf4j
 public class MainController {
 
+    @GetMapping("/hi")
+    public ResponseEntity<Map<String, Object>> hi() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("message", "hi");
+        return ResponseEntity.ok(result);
+    }
     @GetMapping("/")
     public ResponseEntity<Map<String, Object>> main() {
         Map<String, Object> result = new HashMap<>();
