@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
-@RestController
 @Slf4j
 public class MainController {
+
+    private final long number;
+    
+    public MainController() {
+      this.number = new Random().nextInt(100) + 1;
+    }
 
     @GetMapping("/hi")
     public ResponseEntity<Map<String, Object>> hi() {
@@ -23,6 +29,7 @@ public class MainController {
     public ResponseEntity<Map<String, Object>> main() {
         Map<String, Object> result = new HashMap<>();
         result.put("message", "HIHI");
+        result.put("appNumber", this.number);
         try {
             Thread.sleep(500);
             return ResponseEntity.ok(result);
