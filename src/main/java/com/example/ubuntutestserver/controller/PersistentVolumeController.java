@@ -50,7 +50,7 @@ public class PersistentVolumeController {
     public ResponseEntity<Map<String, Object>> fetchDirectory() {
         log.info("this.directoryPath: {}", this.directoryPath);
         final File file = new File(this.directoryPath);
-        if (!file.exists() || file.isDirectory()) {
+        if (!file.exists() || !file.isDirectory()) {
             return ResponseEntity.status(400).body(Map.of("message", "파일이 존재하지 않습니다."));
         }
         final File[] files = file.listFiles();
