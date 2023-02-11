@@ -40,6 +40,10 @@ public class PersistentVolumeController {
         if (FileSystems.getDefault().getSeparator().charAt(0) != c) {
             this.directoryPath = this.directoryPath + FileSystems.getDefault().getSeparator();
         }
+        final File targetDirectory = new File(this.directoryPath);
+        if (!targetDirectory.exists()) {
+            final boolean mkdirs = targetDirectory.mkdirs();
+        }
     }
 
     @GetMapping("/api/pv")
