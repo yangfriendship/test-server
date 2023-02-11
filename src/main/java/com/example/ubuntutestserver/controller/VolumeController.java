@@ -2,6 +2,7 @@ package com.example.ubuntutestserver.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 @RequiredArgsConstructor
 @RestController
+@Slf4j
 public class VolumeController {
 
     @Value("${volume.file-path:/default-file.txt}")
@@ -30,6 +32,7 @@ public class VolumeController {
 
     @GetMapping("/api/volumes/files")
     public ResponseEntity<Map<String, Object>> fetchFile() throws IOException {
+        log.info("this.filePath = {}", this.filePath);
         fileLock.lock();
         File file = new File(this.filePath);
         try (final BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -50,6 +53,7 @@ public class VolumeController {
 
     @PostMapping("/api/volumes/files")
     public ResponseEntity<Map<String, Object>> writeFile(@RequestBody Map<String, Object> body) throws IOException {
+        log.info("this.filePath = {}", this.filePath);
         fileLock.lock();
         final File file = new File(this.filePath);
         try (final BufferedWriter br = new BufferedWriter(new FileWriter(file))) {
