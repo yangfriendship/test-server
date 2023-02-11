@@ -1,0 +1,10 @@
+server:
+  port: 7777
+
+
+configmap:
+  props:
+    map1:
+      name: name1
+    map2:
+      name: name1
